@@ -1,0 +1,44 @@
+<% if @circle.persisted? %>
+  <% title = "Edit Circle" %>
+  <% path = circle_url(@circle) %>
+  <% request_method = "PATCH"%>
+<% else %>
+  <% title = "New Circle" %>
+  <% path = circles_url %>
+  <% request_method = "POST"%>
+<% end %>
+
+<h1><%= title %></h1>
+
+<form action="<%= path %>" method="POST">
+  <%= auth_token %>
+
+  <input type="hidden" name="_method" value="<%= request_method %>">
+
+  <label>
+    Circle Name
+    <input type="text" name="circle[name]" value="<%= @circle.name %>">
+  </label>
+
+  <br>
+
+  Members
+  <input type="hidden" name="circle[friend_ids][]" value="">
+  <% User.all.each do |user| %>
+    <% next if user.id == current_user.id %>
+    <br>
+
+    <label>
+      <%= user.email %>
+      <input
+        type="checkbox"
+        name="circle[friend_ids][]"
+        value="<%= user.id %>"
+        <%= "checked" if @circle.friend_ids.include?(user.id) %>>
+    </label>
+  <% end %>
+
+  <br>
+
+  <button>Submit</button>
+</form>
