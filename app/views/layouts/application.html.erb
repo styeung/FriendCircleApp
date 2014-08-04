@@ -36,20 +36,23 @@
 
 <hr>
 
-<ul>
-  <% unless current_path == home_path %>
-    <li><a href="<%= home_url %>">Home</a></li>
-  <% end %>
-  <% unless current_path == feed_path %>
-    <li><a href="<%= feed_url %>">My Feed</a></li>
-  <% end %>
-  <% unless current_path == new_post_path %>
-    <li><a href="<%= new_post_url %>">New Post</a></li>
-  <% end %>
-  <% unless current_path == new_circle_path %>
-    <li><a href="<%= new_circle_url %>">New Circle</a></li>
-  <% end %>
-</ul>
+<% if signed_in? %>
+  <ul>
+    <% unless current_path == home_path %>
+      <li><a href="<%= home_url %>">Home</a></li>
+    <% end %>
+    <% unless current_path == feed_path %>
+      <li><a href="<%= feed_url %>">My Feed</a></li>
+    <% end %>
+    <% unless current_path == new_post_path %>
+      <li><a href="<%= new_post_url %>">New Post</a></li>
+    <% end %>
+    <% unless current_path == new_circle_path %>
+      <li><a href="<%= new_circle_url %>">New Circle</a></li>
+    <% end %>
+      <li><a href="<%= forgot_password_url %>">Reset your Password</a></li>
+  </ul>
+<% end %>
 
 </body>
 </html>

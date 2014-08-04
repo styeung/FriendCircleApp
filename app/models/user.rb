@@ -64,6 +64,13 @@ class User < ActiveRecord::Base
     self.session_token
   end
 
+  def set_forgot_token!
+    self.forgot_token = self.class.generate_token
+    self.save!
+
+    self.forgot_token
+  end
+
   private
 
   def ensure_session_token
