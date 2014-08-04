@@ -16,4 +16,13 @@ class Circle < ActiveRecord::Base
     source: :member,
     inverse_of: :member_circles
   )
+
+  has_many :post_shares, inverse_of: :circle
+
+  has_many(
+    :shared_posts,
+    through: :post_shares,
+    source: :post,
+    inverse_of: :shared_circles
+  )
 end

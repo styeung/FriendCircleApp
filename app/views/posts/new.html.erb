@@ -1,0 +1,68 @@
+<h1>New Post</h1>
+
+<form action="<%= posts_url %>" method="POST">
+  <%= auth_token %>
+
+  <label>
+    Write your post here:
+    <br>
+    <textarea name="post[body]" cols="45" rows="5"><%= @post.body %></textarea>
+  </label>
+
+  <br>
+  <br>
+
+  <label>
+    Link 1
+    <input type="text" name="links[0][title]">
+  </label>
+
+  <label>
+    URL
+    <input type="text" name="links[0][url]">
+  </label>
+
+  <br>
+
+  <label>
+    Link 2
+    <input type="text" name="links[1][title]">
+  </label>
+
+  <label>
+    URL
+    <input type="text" name="links[1][url]">
+  </label>
+
+  <br>
+
+  <label>
+    Link 3
+    <input type="text" name="links[2][title]">
+  </label>
+
+  <label>
+    URL
+    <input type="text" name="links[2][url]">
+  </label>
+
+  <br>
+  <br>
+
+  Pick which circles to share with:
+
+  <br>
+
+  <% current_user.owned_circles.each do |circle| %>
+    <label>
+      <%= circle.name %>
+      <input type="checkbox" name="post[shared_circle_ids][]"
+             value="<%= circle.id %>"
+             <%= "checked" if @post.shared_circle_ids.include?(circle.id) %>>
+    </label>
+  <% end %>
+
+  <br>
+
+  <button>Submit</button>
+</form>

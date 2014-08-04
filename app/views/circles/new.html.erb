@@ -13,6 +13,7 @@
   Members
 
   <% User.all.each do |user| %>
+    <% next if user.id == current_user.id %>
     <br>
 
     <label>

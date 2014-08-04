@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   resources :users, only: [:new, :create, :destroy]
   resources :circles
+  resources :posts
 
   get "/", to: "static_pages#home", as: "home"
 

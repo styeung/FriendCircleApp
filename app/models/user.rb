@@ -22,6 +22,14 @@ class User < ActiveRecord::Base
     inverse_of: :friends
   )
 
+  has_many(
+    :posts,
+    class_name: "Post",
+    foreign_key: :poster_id,
+    primary_key: :id,
+    inverse_of: :poster
+  )
+
   validates :email, :password_digest, presence: true, uniqueness: true
   validates :password, length: { minimum: 6, allow_nil: true}
 

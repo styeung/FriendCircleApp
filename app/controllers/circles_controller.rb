@@ -5,8 +5,7 @@ class CirclesController < ApplicationController
   end
 
   def create
-    @circle = Circle.new(circle_params)
-    @circle.owner_id = current_user.id
+    @circle = current_user.owned_circles.new(circle_params)
 
     if @circle.save
       redirect_to circle_url(@circle)
@@ -14,6 +13,11 @@ class CirclesController < ApplicationController
       flash.now[:errors] = @circle.errors.full_messages
       render :new
     end
+  end
+
+  def show
+    @circle = current_user.owned_circles.find(params[:id])
+    render :show
   end
 
   private
