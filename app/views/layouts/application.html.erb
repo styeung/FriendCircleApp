@@ -6,6 +6,31 @@
 </head>
 <body>
 
+<% if flash.now[:errors] %>
+  <ul>
+  <% flash.now[:errors].each do |message| %>
+    <li><%= message %></li>
+  <% end %>
+  </ul>
+<% end %>
+
+<% if signed_in? %>
+  Welcome, <%= current_user.email %>!
+
+  <br>
+
+  <form action="<%= session_url %>" method="POST">
+    <input type="hidden" name="_method" value="DELETE">
+
+    <%= auth_token %>
+
+    <button>Sign out</button>
+  </form>
+<% else %>
+  <a href="<%= new_session_url %>">Sign In</a>  |
+  <a href="<%= new_user_url %>">Sign Up</a>
+<% end %>
+
 <%= yield %>
 
 </body>

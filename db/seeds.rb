@@ -5,3 +5,14 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+users = User.create([
+  { email: "noah@appacademy.io", password: "noahnoah" },
+  { email: "saito@appacademy.io", password: "saitosaito" },
+  { email: "tommy@appacademy.io", password: "tommytommy" },
+  { email: "jonathan@appacademy.io", password: "jonathanjonathan" }
+])
+
+noah = User.first
+
+noah.owned_circles.create

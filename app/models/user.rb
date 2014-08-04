@@ -1,4 +1,27 @@
 class User < ActiveRecord::Base
+  has_many(
+    :owned_circles,
+    class_name: "Circle",
+    foreign_key: :owner_id,
+    primary_key: :id,
+    inverse_of: :owner
+  )
+
+  has_many(
+    :circle_memberships,
+    class_name: "CircleMembership",
+    foreign_key: :member_id,
+    primary_key: :id,
+    inverse_of: :member
+  )
+
+  has_many(
+    :member_circles,
+    through: :circle_memberships,
+    source: :circle,
+    inverse_of: :friends
+  )
+
   validates :email, :password_digest, presence: true, uniqueness: true
   validates :password, length: { minimum: 6, allow_nil: true}
 
