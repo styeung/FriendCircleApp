@@ -1,0 +1,18 @@
+<h1>Your Feed</h1>
+
+<% @posts.each do |post| %>
+  <h2>Author: <%= post.poster.email %></h2>
+  Posted at: <%= post.created_at %>
+
+  <p><%= post.body %></p>
+
+  <ul>
+    <% post.links.each do |link| %>
+      <li>
+        <a href="<%= link.url %>"><%= link.title %></a>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
+
+<%= paginate @posts %>

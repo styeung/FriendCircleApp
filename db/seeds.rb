@@ -22,8 +22,8 @@ circle = noah.owned_circles.create({ name: "Instructors" })
 
 circle.friend_ids = [tommy.id, jonathan.id]
 
-post = noah.posts.create({ body: "Check out this link!" })
-link = post.links.create( {title: "google", url: "http://www.google.com/" })
-circle.shared_post_ids = [post.id]
-
+100.times do
+  post = noah.posts.create({ body: "Check out this link!", shared_circle_ids: [circle.id] })
+  link = post.links.create( {title: "google", url: "http://www.google.com/" })
+end
 

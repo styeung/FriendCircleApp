@@ -21,7 +21,7 @@
   <a href="<%= new_session_url %>">Sign In</a>  |
   <a href="<%= new_user_url %>">Sign Up</a>
 <% end %>
-
+<hr>
 <% if flash.now[:errors] %>
   <ul>
   <% flash.now[:errors].each do |message| %>
@@ -31,6 +31,25 @@
 <% end %>
 
 <%= yield %>
+
+<%  current_path = request.env['PATH_INFO'] %>
+
+<hr>
+
+<ul>
+  <% unless current_path == home_path %>
+    <li><a href="<%= home_url %>">Home</a></li>
+  <% end %>
+  <% unless current_path == feed_path %>
+    <li><a href="<%= feed_url %>">My Feed</a></li>
+  <% end %>
+  <% unless current_path == new_post_path %>
+    <li><a href="<%= new_post_url %>">New Post</a></li>
+  <% end %>
+  <% unless current_path == new_circle_path %>
+    <li><a href="<%= new_circle_url %>">New Circle</a></li>
+  <% end %>
+</ul>
 
 </body>
 </html>
