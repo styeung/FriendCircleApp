@@ -11,14 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140804151731) do
+ActiveRecord::Schema.define(version: 20140804161738) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "circle_memberships", force: true do |t|
-    t.integer  "circle_id",  null: false
-    t.integer  "member_id",  null: false
+    t.integer  "circle_id"
+    t.integer  "member_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(version: 20140804151731) do
 
   create_table "circles", force: true do |t|
     t.string   "name",       null: false
-    t.integer  "owner_id",   null: false
+    t.integer  "owner_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

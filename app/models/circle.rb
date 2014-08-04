@@ -1,5 +1,5 @@
 class Circle < ActiveRecord::Base
-  validates :name, :owner_id, presence: true
+  validates :name, :owner, presence: true
 
   belongs_to(
     :owner,

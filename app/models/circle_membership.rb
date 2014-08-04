@@ -1,7 +1,8 @@
 class CircleMembership < ActiveRecord::Base
-  validates :circle_id, :member_id, presence: true
+  validates :circle, :member, presence: true
 
   belongs_to :circle, inverse_of: :circle_memberships
+
   belongs_to(
     :member,
     class_name: "User",

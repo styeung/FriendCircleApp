@@ -1,0 +1,31 @@
+<h1>Make a New Circle</h1>
+
+<form action="<%= circles_url %>" method="POST">
+  <%= auth_token %>
+
+  <label>
+    Circle Name
+    <input type="text" name="circle[name]" value="<%= @circle.name %>">
+  </label>
+
+  <br>
+
+  Members
+
+  <% User.all.each do |user| %>
+    <br>
+
+    <label>
+      <%= user.email %>
+      <input
+        type="checkbox"
+        name="circle[friend_ids][]"
+        value="<%= user.id %>"
+        <%= "checked" if @circle.friend_ids.include?(user.id) %>>
+    </label>
+  <% end %>
+
+  <br>
+
+  <button>Submit</button>
+</form>
