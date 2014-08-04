@@ -14,5 +14,12 @@ users = User.create([
 ])
 
 noah = User.first
+saito = User.find_by_email("saito@appacademy.io")
+tommy = User.find_by_email("tommy@appacademy.io")
+jonathan = User.find_by_email("jonathan@appacademy.io")
 
-noah.owned_circles.create
+circle = noah.owned_circles.create({ name: "Instructors" })
+
+circle.friend_ids = [tommy.id, jonathan.id]
+
+

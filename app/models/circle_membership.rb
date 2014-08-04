@@ -6,7 +6,7 @@ class CircleMembership < ActiveRecord::Base
     :member,
     class_name: "User",
     foreign_key: :member_id,
-    primary_key: id,
+    primary_key: :id,
     inverse_of: :circle_memberships
   )
 end
