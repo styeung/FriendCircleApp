@@ -5,5 +5,6 @@ class UserMailer < ActionMailer::Base
     @user = user
     @token = user.forgot_token
     mail(to: user.email, subject: "Reset Your Password")
+    fail
   end
 end
