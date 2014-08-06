@@ -3,7 +3,10 @@ Rails.application.routes.draw do
 
   resources :users, only: [:new, :create, :update, :destroy]
   resources :circles
-  resources :posts
+  resources :posts do
+    resources :upvotes, only: [:create, :destroy]
+    resources :comments, only: [:create, :destroy]
+  end
 
   get "/", to: "static_pages#home", as: "home"
   get "/feed", to: "posts#feed", as: "feed"

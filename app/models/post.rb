@@ -19,4 +19,20 @@ class Post < ActiveRecord::Base
     source: :circle,
     inverse_of: :shared_posts
   )
+
+  has_many(
+    :upvotes,
+    class_name: "Upvote",
+    foreign_key: :post_id,
+    primary_key: :id,
+    inverse_of: :post
+  )
+
+  has_many(
+    :post_comments,
+    class_name: "Comment",
+    foreign_key: :post_id,
+    primary_key: :id,
+    inverse_of: :post
+  )
 end

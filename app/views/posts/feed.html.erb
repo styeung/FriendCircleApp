@@ -2,7 +2,7 @@
 
 <% @posts.each do |post| %>
   <h2>Author: <%= post.poster.email %></h2>
-  Posted at: <%= post.created_at %>
+  Posted on: <%= (post.created_at).strftime("%b %d, %Y") %>
 
   <p><%= post.body %></p>
 
@@ -13,6 +13,37 @@
       </li>
     <% end %>
   </ul>
+  <br>
+  <% my_upvote = post.upvotes.find {|upvote| upvote.user_id == current_user.id }  %>
+  <% if my_upvote %>
+    <form action="<%= post_upvote_url(post, my_upvote) %>" method="POST">
+      <%= auth_token %>
+      <input type="hidden" name="_method" value="delete">
+      <input type="submit" value="Remove Vote">
+    </form>
+  <% else %>
+    <form action="<%= post_upvotes_url(post) %>" method="POST">
+      <%= auth_token %>
+      <input type="submit" value="Upvote!">
+    </form>
+  <% end %>
+  <h3><b>Comments</b></h3>
+  <% post.post_comments.each do |comment| %>
+    <p><b><%= comment.commenter.email %></b> - <i><%= time_ago_in_words( comment.created_at)%> ago</i></p>
+    <p><%= comment.body %></p>
+  <% end %>
+
+  <p><b>+<%= post.upvotes.count %></b></p>
+  <form action="<%= post_comments_url(post) %>" method="POST">
+    <%= auth_token %>
+    <label>
+      Add Comment
+      <input type="text" name="comment[body]">
+    </label>
+    <br>
+    <input type="submit" value="Add Comment">
+  </form>
+  <hr>
 <% end %>
 
 <%= paginate @posts %>

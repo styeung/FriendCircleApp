@@ -23,7 +23,6 @@ class PostsController < ApplicationController
       .joins(:shared_circles => :friends)
       .where("users.id = ?", current_user.id)
       .order("created_at DESC").page(params[:page]).per(10)
-
     render :feed
   end
 

@@ -30,6 +30,22 @@ class User < ActiveRecord::Base
     inverse_of: :poster
   )
 
+  has_many(
+    :upvotes,
+    class_name: "Upvote",
+    foreign_key: :user_id,
+    primary_key: :id,
+    inverse_of: :user
+  )
+
+  has_many(
+    :own_comments,
+    class_name: "Comment",
+    foreign_key: :commenter_id,
+    primary_key: :id,
+    inverse_of: :commenter
+  )
+
   validates :email, :password_digest, presence: true, uniqueness: true
   validates :password, length: { minimum: 6, allow_nil: true}
 
